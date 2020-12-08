@@ -3,6 +3,8 @@ package alejandrofan2.hundirlaflota.utiles;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
+
 import alejandrofan2.hundirlaflota.principal.GestorPantalla;
 
 /*
@@ -35,8 +37,10 @@ public class ControlRaton extends MouseAdapter {
 			System.out.println("Has presionado play");
 		}
 		if (e.getSource() == GestorPantalla.getBotonSalir()) {
-			System.out.println("Has presionado salir");
-
+			if (JOptionPane.showConfirmDialog(null, "¿Seguro que deseas cerrar el juego?", "Hundir la Flota", 0,
+					0) == 0) {
+				System.exit(0);
+			}
 		}
 
 		System.out.println("X: " + ratonX + " | Y: " + ratonY);

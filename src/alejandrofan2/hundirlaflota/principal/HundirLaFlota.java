@@ -53,6 +53,7 @@ public class HundirLaFlota extends JFrame implements Runnable {
 
 	// Metodo que ejecuta el segundo thread de procesamiento.
 	public void run() {
+		System.out.println("El segundo thread se esta ejecutando.");
 		while (isRunning) {
 		}
 	}
