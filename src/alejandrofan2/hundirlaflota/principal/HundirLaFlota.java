@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  * continua los graficos de nuestro juego.
  */
 
-public class HundirLaFlota extends JFrame implements Runnable {
+public class HundirLaFlota extends JFrame {
 	private static final long serialVersionUID = 7241792861214941869L;
 
 	public static final int ANCHO = 800;
@@ -24,16 +24,17 @@ public class HundirLaFlota extends JFrame implements Runnable {
 	private static final String RUTA_ICONO = "res/images/icono.png";
 
 	private static volatile boolean isRunning = false;
+	private static short lvlAcual = 1;
 
+	private static  GestorPantalla pantalla = new GestorPantalla();
+	
 	private static JFrame ventana;
-	private static Thread thread;
+	private static Image icono;
 
-	GestorPantalla pantalla = new GestorPantalla();
-
-	Image icono = new ImageIcon(RUTA_ICONO).getImage();
 
 	// Constructor de la clase HundirLaFlota.
 	private HundirLaFlota() {
+		icono = new ImageIcon(RUTA_ICONO).getImage();
 		this.setPreferredSize(new Dimension(ANCHO, ALTO));
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,37 +44,28 @@ public class HundirLaFlota extends JFrame implements Runnable {
 		ventana.add(pantalla, BorderLayout.CENTER);
 		ventana.pack();
 		ventana.setLocationRelativeTo(null);
-		ventana.setVisible(true);
+		ventana.setVisible(true); 
 	}
 
 	// Metodo main.
 	public static void main(String[] args) {
 		HundirLaFlota juego = new HundirLaFlota();
+		pantalla.iniciar();
 	}
 
-	// Metodo que ejecuta el segundo thread de procesamiento.
-	public void run() {
-		System.out.println("El segundo thread se esta ejecutando.");
-		while (isRunning) {
-		}
+	public static boolean getRunning() {
+		return isRunning;
+	}
+	
+	public static void setRunning(boolean isRunning) {
+		HundirLaFlota.isRunning = isRunning;
 	}
 
-	// Metodo que inicia el thread.
-	private synchronized void iniciar() {
-		isRunning = true;
-
-		thread = new Thread(this, "Graficos");
-		thread.start();
+	public static short getLvlAcual() {
+		return lvlAcual;
 	}
 
-	// Metodo que detiene el thread.
-	private synchronized void detener() {
-		isRunning = false;
-
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public static void setLvlAcual(short lvlAcual) {
+		HundirLaFlota.lvlAcual = lvlAcual;
 	}
 }

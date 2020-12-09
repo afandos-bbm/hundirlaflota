@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 
 import alejandrofan2.hundirlaflota.principal.GestorPantalla;
+import alejandrofan2.hundirlaflota.principal.HundirLaFlota;
 
 /*
  * Esta clase se encarga de gestionar el raton y todas sus interaciones, 
@@ -40,6 +41,24 @@ public class ControlRaton extends MouseAdapter {
 			if (JOptionPane.showConfirmDialog(null, "¿Seguro que deseas cerrar el juego?", "Hundir la Flota", 0,
 					0) == 0) {
 				System.exit(0);
+			}
+		}
+		if (e.getSource() == GestorPantalla.getBotonLvl1()) {
+			System.out.println("Has presionado lvl1");
+			if (HundirLaFlota.getLvlAcual() != 1) {
+				HundirLaFlota.setLvlAcual((short)1);
+			}
+		}
+		if (e.getSource() == GestorPantalla.getBotonLvl2()) {
+			System.out.println("Has presionado lvl2");
+			if (HundirLaFlota.getLvlAcual() != 2) {
+				HundirLaFlota.setLvlAcual((short)3);
+			}
+		}
+		if (e.getSource() == GestorPantalla.getBotonLvl3()) {
+			System.out.println("Has presionado lvl3");
+			if (HundirLaFlota.getLvlAcual() != 3) {
+				HundirLaFlota.setLvlAcual((short)3);
 			}
 		}
 
