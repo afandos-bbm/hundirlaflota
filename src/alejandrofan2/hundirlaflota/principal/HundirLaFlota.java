@@ -28,11 +28,10 @@ public class HundirLaFlota extends JFrame {
 	private static Short lvlAcual = 1;
 	private static Boolean nivelpersonalizado = false;
 
-	private static  GestorPantalla pantalla = new GestorPantalla();
-	
+	private static GestorPantalla pantalla = new GestorPantalla();
+
 	private static JFrame ventana;
 	private static Image icono;
-
 
 	// Constructor de la clase HundirLaFlota.
 	private HundirLaFlota() {
@@ -41,28 +40,30 @@ public class HundirLaFlota extends JFrame {
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setIconImage(icono);
-		ventana.setResizable(false);
+		ventana.setResizable(true);
 		ventana.setLayout(new BorderLayout());
 		ventana.add(pantalla, BorderLayout.CENTER);
 		ventana.pack();
 		ventana.setLocationRelativeTo(null);
-		ventana.setVisible(true); 
+		ventana.setVisible(true);
 
 	}
 
 	// Metodo main.
 	public static void main(String[] args) {
-		HundirLaFlota juego = new HundirLaFlota();
-		pantalla.iniciar();
+		// @SuppressWarnings("unused")
+		// HundirLaFlota juego = new HundirLaFlota();
+		MecanicasJuego.crearmapa(MecanicasJuego.getTamañoMapa());
+		// pantalla.iniciar();
 		while (isRunning) {
-			
+
 		}
 	}
 
 	public static boolean getRunning() {
 		return isRunning;
 	}
-	
+
 	public static void setRunning(boolean isRunning) {
 		HundirLaFlota.isRunning = isRunning;
 	}
@@ -82,7 +83,7 @@ public class HundirLaFlota extends JFrame {
 	public static void setLvlAcual(short lvlAcual) {
 		HundirLaFlota.lvlAcual = lvlAcual;
 	}
-	
+
 	public static Boolean getNivelpersonalizado() {
 		return nivelpersonalizado;
 	}
@@ -90,4 +91,5 @@ public class HundirLaFlota extends JFrame {
 	public static void setNivelpersonalizado(Boolean nivelpersonalizado) {
 		HundirLaFlota.nivelpersonalizado = nivelpersonalizado;
 	}
+
 }

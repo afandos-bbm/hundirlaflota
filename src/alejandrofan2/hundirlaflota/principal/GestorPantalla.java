@@ -28,12 +28,12 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 	private static final String RUTA_PLAY = "res/images/play.png";
 	private static final String RUTA_SALIR = "res/images/salir.png";
-	private static final String RUTA_LVL1_ROJO = "res/images/salir.png";
-	private static final String RUTA_LVL1_VERDE = "res/images/play.png";
-	private static final String RUTA_LVL2_ROJO = "res/images/salir.png";
-	private static final String RUTA_LVL2_VERDE = "res/images/play.png";
-	private static final String RUTA_LVL3_ROJO = "res/images/salir.png";
-	private static final String RUTA_LVL3_VERDE = "res/images/play.png";
+	private static final String RUTA_LVL1_ROJO = "res/images/1rojo.png";
+	private static final String RUTA_LVL1_VERDE = "res/images/1verde.png";
+	private static final String RUTA_LVL2_ROJO = "res/images/2rojo.png";
+	private static final String RUTA_LVL2_VERDE = "res/images/2verde.png";
+	private static final String RUTA_LVL3_ROJO = "res/images/3rojo.png";
+	private static final String RUTA_LVL3_VERDE = "res/images/3verde.png";
 
 	private static JLabel botonPlay;
 	private static JLabel botonSalir;
@@ -90,13 +90,13 @@ public class GestorPantalla extends JPanel implements Runnable {
 		botonPlay.setBounds(612 + insets.left, 432 + insets.top, size.width, size.height);
 		botonPlay.setVisible(true);
 		size = botonLvl1.getPreferredSize();
-		botonLvl1.setBounds(312 + insets.left, 162 + insets.top, size.width, size.height);
+		botonLvl1.setBounds(575 + insets.left, 370 + insets.top, size.width, size.height);
 		botonLvl1.setVisible(true);
 		size = botonLvl2.getPreferredSize();
-		botonLvl2.setBounds(312 + insets.left, 262 + insets.top, size.width, size.height);
+		botonLvl2.setBounds(650 + insets.left, 370 + insets.top, size.width, size.height);
 		botonLvl2.setVisible(true);
 		size = botonLvl3.getPreferredSize();
-		botonLvl3.setBounds(312 + insets.left, 432 + insets.top, size.width, size.height);
+		botonLvl3.setBounds(727 + insets.left, 370 + insets.top, size.width, size.height);
 		botonLvl3.setVisible(true);
 
 		this.add(botonPlay);
@@ -130,7 +130,9 @@ public class GestorPantalla extends JPanel implements Runnable {
 	public void run() {
 		System.out.println("El segundo thread se esta ejecutando.");
 		while (HundirLaFlota.getRunning()) {
-			selectorNivel();
+			if (!HundirLaFlota.isPlaying()) {
+				selectorNivel();
+			}
 		}
 	}
 
@@ -194,20 +196,22 @@ public class GestorPantalla extends JPanel implements Runnable {
 			panel.add(nIntentos);
 
 			if (HundirLaFlota.getNivelpersonalizado() == false) {
-				popup = JOptionPane.showConfirmDialog(null, panel, getName(), JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE);
+				popup = JOptionPane.showConfirmDialog(null, panel, "Hundir la flota - Personalizado",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (popup == 2) {
 					HundirLaFlota.setLvlAcual((short) 1);
 					break;
 				} else if (nLanchas.getText().length() == 0 || nBuques.getText().length() == 0
-						|| nAcorazados.getText().length() == 0 || nPortaaviones.getText().length() == 0) {
+						|| nAcorazados.getText().length() == 0 || nPortaaviones.getText().length() == 0
+						|| tamaño.getText().length() == 0 || nIntentos.getText().length() == 0) {
 					JOptionPane.showConfirmDialog(null, "Debes introducir todos los valores.",
 							"Hundir la flota - ERROR", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					HundirLaFlota.setLvlAcual((short) 1);
 					break;
 				}
 				if (!(nLanchas.getText().matches("[0-9]+") && nBuques.getText().matches("[0-9]+")
-						&& nAcorazados.getText().matches("[0-9]+") && nPortaaviones.getText().matches("[0-9]+"))) {
+						&& nAcorazados.getText().matches("[0-9]+") && nPortaaviones.getText().matches("[0-9]+")
+						&& tamaño.getText().matches("[0-9]+") && nIntentos.getText().matches("[0-9]+"))) {
 					JOptionPane.showConfirmDialog(null, "Debes introducir solo numeros enteros.",
 							"Hundir la flota - ERROR", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					HundirLaFlota.setLvlAcual((short) 1);
@@ -217,6 +221,8 @@ public class GestorPantalla extends JPanel implements Runnable {
 					Barcos.setnBuques(Integer.parseInt(nBuques.getText()));
 					Barcos.setnAcorazado(Integer.parseInt(nAcorazados.getText()));
 					Barcos.setnPortaaviones(Integer.parseInt(nPortaaviones.getText()));
+					MecanicasJuego.setTamañoMapa(Integer.parseInt(tamaño.getText()) + 1);
+					MecanicasJuego.setnIntentos(Integer.parseInt(nIntentos.getText()));
 					imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
 					imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);
 					imgLvl3 = new ImageIcon(RUTA_LVL3_VERDE);
