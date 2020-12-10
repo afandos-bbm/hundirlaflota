@@ -7,9 +7,12 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import alejandrofan2.hundirlaflota.utiles.ControlRaton;
 
@@ -45,7 +48,6 @@ public class GestorPantalla extends JPanel implements Runnable {
 	private static ImageIcon imgLvl1;
 	private static ImageIcon imgLvl2;
 	private static ImageIcon imgLvl3;
-	
 	private static Image imgFondo;
 	private static Dimension size;
 	private static Insets insets;
@@ -56,7 +58,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 		insets = this.getInsets();
 		this.setPreferredSize(new Dimension(HundirLaFlota.ANCHO, HundirLaFlota.ALTO));
 		this.setLayout(null);
-		
+
 		imgFondo = new ImageIcon(RUTA_FONDO).getImage();
 		imgPlay = new ImageIcon(RUTA_PLAY);
 		imgSalir = new ImageIcon(RUTA_SALIR);
@@ -69,7 +71,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 		botonLvl1 = new JLabel();
 		botonLvl2 = new JLabel();
 		botonLvl3 = new JLabel();
-		
+
 		botonPlay.setIcon(imgPlay);
 		botonPlay.setText("");
 		botonSalir.setIcon(imgSalir);
@@ -80,7 +82,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 		botonLvl2.setText("");
 		botonLvl3.setIcon(imgLvl3);
 		botonLvl3.setText("");
-		
+
 		size = botonSalir.getPreferredSize();
 		botonSalir.setBounds(612 + insets.left, 503 + insets.top, size.width, size.height);
 		botonSalir.setVisible(true);
@@ -96,7 +98,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 		size = botonLvl3.getPreferredSize();
 		botonLvl3.setBounds(312 + insets.left, 432 + insets.top, size.width, size.height);
 		botonLvl3.setVisible(true);
-		
+
 		this.add(botonPlay);
 		this.add(botonSalir);
 		this.add(botonLvl1);
@@ -108,42 +110,6 @@ public class GestorPantalla extends JPanel implements Runnable {
 		botonLvl1.addMouseListener(raton);
 		botonLvl2.addMouseListener(raton);
 		botonLvl3.addMouseListener(raton);
-		
-		switch (HundirLaFlota.getLvlAcual()) {
-		case 1:
-			imgLvl1 = new ImageIcon(RUTA_LVL1_VERDE);
-			imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);
-			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);
-			botonLvl1.setIcon(imgLvl1);
-			botonLvl2.setIcon(imgLvl2);
-			botonLvl3.setIcon(imgLvl3);
-			break;
-		case 2:
-			imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
-			imgLvl2 = new ImageIcon(RUTA_LVL2_VERDE);
-			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);
-			botonLvl1.setIcon(imgLvl1);
-			botonLvl2.setIcon(imgLvl2);
-			botonLvl3.setIcon(imgLvl3);
-			break;
-		case 3:
-			imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
-			imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);
-			imgLvl3 = new ImageIcon(RUTA_LVL3_VERDE);
-			botonLvl1.setIcon(imgLvl1);
-			botonLvl2.setIcon(imgLvl2);
-			botonLvl3.setIcon(imgLvl3);
-			break;
-		default:
-			imgLvl1 = new ImageIcon(RUTA_LVL1_VERDE);
-			imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);
-			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);
-			botonLvl1.setIcon(imgLvl1);
-			botonLvl2.setIcon(imgLvl2);
-			botonLvl3.setIcon(imgLvl3);
-			break;
-		}
-		repaint();
 
 	}
 
@@ -159,12 +125,116 @@ public class GestorPantalla extends JPanel implements Runnable {
 		g2D.drawImage(imgFondo, 0, 0, this);
 
 	}
+
 	// Metodo que ejecuta el segundo thread de procesamiento.
 	public void run() {
 		System.out.println("El segundo thread se esta ejecutando.");
 		while (HundirLaFlota.getRunning()) {
-			repaint();
+			selectorNivel();
 		}
+	}
+
+	private void selectorNivel() {
+		switch (HundirLaFlota.getLvlAcual()) {
+		case 1:
+			Barcos.setnLanchas(5);
+			Barcos.setnBuques(3);
+			Barcos.setnAcorazado(1);
+			Barcos.setnPortaaviones(1);
+			imgLvl1 = new ImageIcon(RUTA_LVL1_VERDE);
+			imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);
+			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);
+			botonLvl1.setIcon(imgLvl1);
+			botonLvl2.setIcon(imgLvl2);
+			botonLvl3.setIcon(imgLvl3);
+			botonLvl1.repaint();
+			botonLvl2.repaint();
+			botonLvl3.repaint();
+			HundirLaFlota.setNivelpersonalizado(false);
+			break;
+
+		case 2:
+			Barcos.setnLanchas(5);
+			Barcos.setnBuques(3);
+			Barcos.setnAcorazado(1);
+			Barcos.setnPortaaviones(1);
+			imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
+			imgLvl2 = new ImageIcon(RUTA_LVL2_VERDE);
+			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);
+			botonLvl1.setIcon(imgLvl1);
+			botonLvl2.setIcon(imgLvl2);
+			botonLvl3.setIcon(imgLvl3);
+			botonLvl1.repaint();
+			botonLvl2.repaint();
+			botonLvl3.repaint();
+			HundirLaFlota.setNivelpersonalizado(false);
+			break;
+
+		case 3:
+			JPanel panel = new JPanel();
+			JTextField nLanchas = new JTextField(2);
+			JTextField nBuques = new JTextField(2);
+			JTextField nAcorazados = new JTextField(2);
+			JTextField nPortaaviones = new JTextField(2);
+			JTextField tamaño = new JTextField(3);
+			JTextField nIntentos = new JTextField(2);
+			int popup = 2;
+			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+			panel.add(new JLabel("Tamaño del tablero:"));
+			panel.add(tamaño);
+			panel.add(new JLabel("Numero de lanchas:"));
+			panel.add(nLanchas);
+			panel.add(new JLabel("Numero de Buques:"));
+			panel.add(nBuques);
+			panel.add(new JLabel("Numero de Acorazados:"));
+			panel.add(nAcorazados);
+			panel.add(new JLabel("Numero de Portaaviones:"));
+			panel.add(nPortaaviones);
+			panel.add(new JLabel("Intentos maximos:"));
+			panel.add(nIntentos);
+
+			if (HundirLaFlota.getNivelpersonalizado() == false) {
+				popup = JOptionPane.showConfirmDialog(null, panel, getName(), JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+				if (popup == 2) {
+					HundirLaFlota.setLvlAcual((short) 1);
+					break;
+				} else if (nLanchas.getText().length() == 0 || nBuques.getText().length() == 0
+						|| nAcorazados.getText().length() == 0 || nPortaaviones.getText().length() == 0) {
+					JOptionPane.showConfirmDialog(null, "Debes introducir todos los valores.",
+							"Hundir la flota - ERROR", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					HundirLaFlota.setLvlAcual((short) 1);
+					break;
+				}
+				if (!(nLanchas.getText().matches("[0-9]+") && nBuques.getText().matches("[0-9]+")
+						&& nAcorazados.getText().matches("[0-9]+") && nPortaaviones.getText().matches("[0-9]+"))) {
+					JOptionPane.showConfirmDialog(null, "Debes introducir solo numeros enteros.",
+							"Hundir la flota - ERROR", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					HundirLaFlota.setLvlAcual((short) 1);
+					break;
+				} else {
+					Barcos.setnLanchas(Integer.parseInt(nLanchas.getText()));
+					Barcos.setnBuques(Integer.parseInt(nBuques.getText()));
+					Barcos.setnAcorazado(Integer.parseInt(nAcorazados.getText()));
+					Barcos.setnPortaaviones(Integer.parseInt(nPortaaviones.getText()));
+					imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
+					imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);
+					imgLvl3 = new ImageIcon(RUTA_LVL3_VERDE);
+					botonLvl1.setIcon(imgLvl1);
+					botonLvl2.setIcon(imgLvl2);
+					botonLvl3.setIcon(imgLvl3);
+					botonLvl1.repaint();
+					botonLvl2.repaint();
+					botonLvl3.repaint();
+					HundirLaFlota.setNivelpersonalizado(true);
+				}
+			}
+			break;
+
+		default:
+			break;
+		}
+
 	}
 
 	// Metodo que inicia el thread.
@@ -176,7 +246,8 @@ public class GestorPantalla extends JPanel implements Runnable {
 	}
 
 	// Metodo que detiene el thread.true
-	private synchronized void detener() {
+	public synchronized void detener() {
+		HundirLaFlota.setPlaying(false);
 		HundirLaFlota.setRunning(false);
 
 		try {
@@ -195,7 +266,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 	public static JLabel getBotonSalir() {
 		return botonSalir;
 	}
-	
+
 	public static JLabel getBotonLvl1() {
 		return botonLvl1;
 	}

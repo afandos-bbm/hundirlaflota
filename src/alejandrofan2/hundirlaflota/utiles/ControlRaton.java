@@ -17,8 +17,8 @@ import alejandrofan2.hundirlaflota.principal.HundirLaFlota;
 public class ControlRaton extends MouseAdapter {
 
 	private boolean click;
-	public static int ratonX = 0;
-	public static int ratonY = 0;
+	private static int ratonX = 0;
+	private static int ratonY = 0;
 
 	// Constructor de la clase ControlRaton.
 	public ControlRaton() {
@@ -30,7 +30,7 @@ public class ControlRaton extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		ratonX = e.getX();
 		ratonY = e.getY();
-
+		
 		if (!click) {
 			click = true;
 		}
@@ -44,19 +44,16 @@ public class ControlRaton extends MouseAdapter {
 			}
 		}
 		if (e.getSource() == GestorPantalla.getBotonLvl1()) {
-			System.out.println("Has presionado lvl1");
 			if (HundirLaFlota.getLvlAcual() != 1) {
 				HundirLaFlota.setLvlAcual((short)1);
 			}
 		}
 		if (e.getSource() == GestorPantalla.getBotonLvl2()) {
-			System.out.println("Has presionado lvl2");
 			if (HundirLaFlota.getLvlAcual() != 2) {
-				HundirLaFlota.setLvlAcual((short)3);
+				HundirLaFlota.setLvlAcual((short)2);
 			}
 		}
 		if (e.getSource() == GestorPantalla.getBotonLvl3()) {
-			System.out.println("Has presionado lvl3");
 			if (HundirLaFlota.getLvlAcual() != 3) {
 				HundirLaFlota.setLvlAcual((short)3);
 			}
@@ -65,16 +62,24 @@ public class ControlRaton extends MouseAdapter {
 		System.out.println("X: " + ratonX + " | Y: " + ratonY);
 	}
 
-	// Getter de la variable Click que nos indica si el click ha sido pulsado.
-	public boolean getClick() {
-		return click;
-	}
-
 	// metodo que restartea la variable click despues de ser pulsada
 	public boolean restartClick() {
 		if (click) {
 			click = false;
 		}
 		return click;
+	}
+	
+	// Getter de la variable Click que nos indica si el click ha sido pulsado.
+	public boolean getClick() {
+		return click;
+	}
+	
+	public static int getRatonX() {
+		return ratonX;
+	}
+
+	public static int getRatonY() {
+		return ratonY;
 	}
 }

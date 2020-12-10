@@ -23,8 +23,10 @@ public class HundirLaFlota extends JFrame {
 	private static final String NOMBRE = "HUNDIR LA FLOTA (Singleplayer)";
 	private static final String RUTA_ICONO = "res/images/icono.png";
 
-	private static volatile boolean isRunning = false;
-	private static short lvlAcual = 1;
+	private static volatile Boolean isRunning = false;
+	private static volatile Boolean isPlaying = false;
+	private static Short lvlAcual = 1;
+	private static Boolean nivelpersonalizado = false;
 
 	private static  GestorPantalla pantalla = new GestorPantalla();
 	
@@ -45,12 +47,16 @@ public class HundirLaFlota extends JFrame {
 		ventana.pack();
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true); 
+
 	}
 
 	// Metodo main.
 	public static void main(String[] args) {
 		HundirLaFlota juego = new HundirLaFlota();
 		pantalla.iniciar();
+		while (isRunning) {
+			
+		}
 	}
 
 	public static boolean getRunning() {
@@ -61,11 +67,27 @@ public class HundirLaFlota extends JFrame {
 		HundirLaFlota.isRunning = isRunning;
 	}
 
+	public static boolean isPlaying() {
+		return isPlaying;
+	}
+
+	public static void setPlaying(boolean isPlaying) {
+		HundirLaFlota.isPlaying = isPlaying;
+	}
+
 	public static short getLvlAcual() {
 		return lvlAcual;
 	}
 
 	public static void setLvlAcual(short lvlAcual) {
 		HundirLaFlota.lvlAcual = lvlAcual;
+	}
+	
+	public static Boolean getNivelpersonalizado() {
+		return nivelpersonalizado;
+	}
+
+	public static void setNivelpersonalizado(Boolean nivelpersonalizado) {
+		HundirLaFlota.nivelpersonalizado = nivelpersonalizado;
 	}
 }
