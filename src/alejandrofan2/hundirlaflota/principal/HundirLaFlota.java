@@ -20,7 +20,7 @@ public class HundirLaFlota extends JFrame {
 
 	public static final int ANCHO = 800;
 	public static final int ALTO = 600;
-	private static final String NOMBRE = "HUNDIR LA FLOTA (Singleplayer)";
+	public static final String NOMBRE = "HUNDIR LA FLOTA (Singleplayer)";
 	private static final String RUTA_ICONO = "res/images/icono.png";
 
 	private static volatile Boolean isRunning = false;
@@ -53,7 +53,7 @@ public class HundirLaFlota extends JFrame {
 	public static void main(String[] args) {
 		// @SuppressWarnings("unused")
 		// HundirLaFlota juego = new HundirLaFlota();
-		MecanicasJuego.crearmapa(MecanicasJuego.getTamañoMapa());
+		MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
 		// pantalla.iniciar();
 		while (isRunning) {
 

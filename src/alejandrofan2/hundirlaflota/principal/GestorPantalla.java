@@ -139,10 +139,10 @@ public class GestorPantalla extends JPanel implements Runnable {
 	private void selectorNivel() {
 		switch (HundirLaFlota.getLvlAcual()) {
 		case 1:
-			Barcos.setnLanchas(5);
-			Barcos.setnBuques(3);
-			Barcos.setnAcorazado(1);
-			Barcos.setnPortaaviones(1);
+			GestorBarcos.setnLanchas(5);
+			GestorBarcos.setnBuques(3);
+			GestorBarcos.setnAcorazado(1);
+			GestorBarcos.setnPortaaviones(1);
 			imgLvl1 = new ImageIcon(RUTA_LVL1_VERDE);
 			imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);
 			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);
@@ -156,10 +156,10 @@ public class GestorPantalla extends JPanel implements Runnable {
 			break;
 
 		case 2:
-			Barcos.setnLanchas(5);
-			Barcos.setnBuques(3);
-			Barcos.setnAcorazado(1);
-			Barcos.setnPortaaviones(1);
+			GestorBarcos.setnLanchas(5);
+			GestorBarcos.setnBuques(3);
+			GestorBarcos.setnAcorazado(1);
+			GestorBarcos.setnPortaaviones(1);
 			imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
 			imgLvl2 = new ImageIcon(RUTA_LVL2_VERDE);
 			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);
@@ -217,10 +217,10 @@ public class GestorPantalla extends JPanel implements Runnable {
 					HundirLaFlota.setLvlAcual((short) 1);
 					break;
 				} else {
-					Barcos.setnLanchas(Integer.parseInt(nLanchas.getText()));
-					Barcos.setnBuques(Integer.parseInt(nBuques.getText()));
-					Barcos.setnAcorazado(Integer.parseInt(nAcorazados.getText()));
-					Barcos.setnPortaaviones(Integer.parseInt(nPortaaviones.getText()));
+					GestorBarcos.setnLanchas(Integer.parseInt(nLanchas.getText()));
+					GestorBarcos.setnBuques(Integer.parseInt(nBuques.getText()));
+					GestorBarcos.setnAcorazado(Integer.parseInt(nAcorazados.getText()));
+					GestorBarcos.setnPortaaviones(Integer.parseInt(nPortaaviones.getText()));
 					MecanicasJuego.setTamañoMapa(Integer.parseInt(tamaño.getText()) + 1);
 					MecanicasJuego.setnIntentos(Integer.parseInt(nIntentos.getText()));
 					imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);

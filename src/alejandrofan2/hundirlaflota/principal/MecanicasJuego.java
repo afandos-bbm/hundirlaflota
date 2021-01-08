@@ -10,32 +10,49 @@ public class MecanicasJuego {
 	private static char[][] MapaContrincante;
 
 	public MecanicasJuego() {
-		MapaJugador = crearmapa(tamañoMapa);
-		MapaContrincante = crearmapa(tamañoMapa);
+		MapaJugador = crearMapa(tamañoMapa);
+		MapaContrincante = crearMapa(tamañoMapa);
 
 	}
 
-	public static char[][] crearmapa(int tamaño) {
+	public static void atacar(char[][] mapa, int[] posicionAtaque) {
+		int posicionAtaqueX = posicionAtaque[0];
+		int posicionAtaqueY = posicionAtaque[1];
+		if (mapa[posicionAtaqueX][posicionAtaqueY] != 45) {
+			switch (mapa[posicionAtaqueX][posicionAtaqueY]) {
+			case 65: //ya has atacado aqui
+				
+				break;
+			case 76: //Lancha
+				
+				break;
+			case 66: //buque
+				
+				break;
+			case 90: //Acorazado
+				
+				break;
+			case 80: //Portaaviones
+				
+				break;
+			default: //Fallo
+				break;
+			}
+		} else {
+			//agua
+		}
+	}
+	
+	public static char[][] crearMapa(int tamaño) {
 		char[][] m = new char[tamaño][tamaño];
 		ejeX = new int[tamaño];
 		ejeY = new char[tamaño];
 		for (int i = 0; i < m.length; i++) {
-			int cont = 65;
-			ejeX[i] = i;
-			ejeY[i] = (char) cont;
-			cont++;
 			for (int j = 0; j < m.length; j++) {
 				m[i][j] = 45;
-				}
 			}
-		Barcos.insertarBarcos(m, Barcos.getnLanchas(), Barcos.getnBuques(), Barcos.getnAcorazado(),
-				Barcos.getnPortaaviones());
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + "  ");
-			}
-			System.out.println(ejeY + " | ");
 		}
+		GestorBarcos.insertarBarcos(m, GestorBarcos.getnLanchas(), GestorBarcos.getnBuques(), GestorBarcos.getnAcorazado(),GestorBarcos.getnPortaaviones());
 		return m;
 	}
 
