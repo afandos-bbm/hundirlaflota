@@ -35,8 +35,9 @@ public class ControlRaton extends MouseAdapter {
 			click = true;
 		}
 		if (e.getSource() == GestorPantalla.getBotonPlay()) {
-			System.out.println("Has presionado play");
-		}
+			HundirLaFlota.setIsPlaying(true);
+			
+			}
 		if (e.getSource() == GestorPantalla.getBotonSalir()) {
 			if (JOptionPane.showConfirmDialog(null, "¿Seguro que deseas cerrar el juego?", "Hundir la Flota", 0,
 					0) == 0) {
@@ -58,8 +59,6 @@ public class ControlRaton extends MouseAdapter {
 				HundirLaFlota.setLvlAcual((short)3);
 			}
 		}
-
-		System.out.println("X: " + ratonX + " | Y: " + ratonY);
 	}
 
 	// metodo que restartea la variable click despues de ser pulsada

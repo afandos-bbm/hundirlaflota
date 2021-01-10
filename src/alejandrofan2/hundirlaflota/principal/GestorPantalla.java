@@ -128,7 +128,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 	// Metodo que ejecuta el segundo thread de procesamiento.
 	public void run() {
-		System.out.println("El segundo thread se esta ejecutando.");
+		System.out.println("[" + HundirLaFlota.NOMBRE + "] El segundo thread se esta ejecutando.");
 		while (HundirLaFlota.getRunning()) {
 			if (!HundirLaFlota.isPlaying()) {
 				selectorNivel();
@@ -156,10 +156,17 @@ public class GestorPantalla extends JPanel implements Runnable {
 			break;
 
 		case 2:
+<<<<<<< Updated upstream
 			Barcos.setnLanchas(5);
 			Barcos.setnBuques(3);
 			Barcos.setnAcorazado(1);
 			Barcos.setnPortaaviones(1);
+=======
+			GestorBarcos.setnLanchas(2);
+			GestorBarcos.setnBuques(1);
+			GestorBarcos.setnAcorazado(1);
+			GestorBarcos.setnPortaaviones(1);
+>>>>>>> Stashed changes
 			imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
 			imgLvl2 = new ImageIcon(RUTA_LVL2_VERDE);
 			imgLvl3 = new ImageIcon(RUTA_LVL3_ROJO);

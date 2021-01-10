@@ -3,6 +3,10 @@ package alejandrofan2.hundirlaflota.principal;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
+<<<<<<< Updated upstream
+=======
+import java.util.Scanner;
+>>>>>>> Stashed changes
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -32,7 +36,11 @@ public class HundirLaFlota extends JFrame {
 
 	private static JFrame ventana;
 	private static Image icono;
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 	// Constructor de la clase HundirLaFlota.
 	private HundirLaFlota() {
 		icono = new ImageIcon(RUTA_ICONO).getImage();
@@ -40,7 +48,7 @@ public class HundirLaFlota extends JFrame {
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setIconImage(icono);
-		ventana.setResizable(true);
+		ventana.setResizable(false);
 		ventana.setLayout(new BorderLayout());
 		ventana.add(pantalla, BorderLayout.CENTER);
 		ventana.pack();
@@ -51,13 +59,62 @@ public class HundirLaFlota extends JFrame {
 
 	// Metodo main.
 	public static void main(String[] args) {
+<<<<<<< Updated upstream
 		// @SuppressWarnings("unused")
 		// HundirLaFlota juego = new HundirLaFlota();
 		MecanicasJuego.crearmapa(MecanicasJuego.getTamañoMapa());
 		// pantalla.iniciar();
+=======
+		@SuppressWarnings("unused")
+		HundirLaFlota juego = new HundirLaFlota();
+		int[] posicionAtaque = new int[2];
+		char[][] mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
+		pantalla.iniciar();
+		Boolean checkMapa = false;
+>>>>>>> Stashed changes
 		while (isRunning) {
+			if (isPlaying()) {
 
+				if (checkMapa == false) {
+					mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
+					checkMapa = true;
+				}
+				MecanicasJuego.imprimirMapaConsola(mapa);
+				Scanner teclado = new Scanner(System.in);
+				posicionAtaque[0] = teclado.nextInt() -1;
+				posicionAtaque[1] = teclado.nextInt() -1;
+				MecanicasJuego.atacar(mapa, posicionAtaque);
+				MecanicasJuego.imprimirMapaConsola(mapa);
+				if (MecanicasJuego.getVidasBarcos() == 0) {
+					System.out.println("[" + NOMBRE + "] Has ganado, saliendo.");
+					isPlaying = false;
+					isRunning = false;
+					System.exit(0);
+				}
+				if (MecanicasJuego.getnIntentos() == 0) {
+					System.out.println("[" + NOMBRE + "] Has perdido, saliendo.");
+					isPlaying = false;
+					isRunning = false;
+					System.exit(0);
+				}
+			}
 		}
+	}
+
+	public static Boolean getIsRunning() {
+		return isRunning;
+	}
+
+	public static void setIsRunning(Boolean isRunning) {
+		HundirLaFlota.isRunning = isRunning;
+	}
+
+	public static Boolean getIsPlaying() {
+		return isPlaying;
+	}
+
+	public static void setIsPlaying(Boolean isPlaying) {
+		HundirLaFlota.isPlaying = isPlaying;
 	}
 
 	public static boolean getRunning() {
