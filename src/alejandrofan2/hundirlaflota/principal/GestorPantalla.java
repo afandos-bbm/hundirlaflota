@@ -132,7 +132,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 	//Metodo que ejecuta el segundo thread de procesamiento.
 	public void run() {
-		System.out.println("[" + HundirLaFlota.NOMBRE + "] El segundo thread se esta ejecutando.");
+		System.out.println(HundirLaFlota.ANSI_GREEN + "[" + HundirLaFlota.NOMBRE + "] El segundo thread se esta ejecutando." + HundirLaFlota.ANSI_RESET);
 		while (HundirLaFlota.getRunning()) {
 			if (!HundirLaFlota.isPlaying()) {
 				selectorNivel();

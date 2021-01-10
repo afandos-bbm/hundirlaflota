@@ -8,6 +8,8 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import alejandrofan2.hundirlaflota.utiles.Transformer;
+
 /*
  * Esta es la clase principal del juego la cual alberga el metodo main.
  * La clase se extiende a JFrame para poder invocar a una nueva ventana donde
@@ -23,6 +25,12 @@ public class HundirLaFlota extends JFrame {
 	public static final int ALTO = 600;
 	public static final String NOMBRE = "HUNDIR LA FLOTA (Singleplayer)";
 	private static final String RUTA_ICONO = "res/images/icono.png";
+	
+	//Constantes para el uso de colores en la consola
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_RESET = "\u001B[0m";
 
 	private static volatile Boolean isRunning = false;
 	private static volatile Boolean isPlaying = false;
@@ -64,13 +72,14 @@ public class HundirLaFlota extends JFrame {
 					checkMapa = true;
 				}
 				MecanicasJuego.imprimirMapaConsola(mapa);
+				@SuppressWarnings("resource")
 				Scanner teclado = new Scanner(System.in);
 				//Estos dos Scanners no estan controlados los fallos debido a que son temporales
 				// hasta que se habilite el apartado grafico.
-				System.out.print("Introduce la fila(A,B,C...)[Por ahora escribir numero]: ");
-				posicionAtaque[0] = teclado.nextInt() -1;
+				System.out.print("Introduce la fila(A,B,C...): ");
+				posicionAtaque[0] = Transformer.letraanum(teclado.nextLine()) - 1;
 				System.out.print("Introduce la columna(1,2,3...): ");
-				posicionAtaque[1] = teclado.nextInt() -1;
+				posicionAtaque[1] = teclado.nextInt() - 1;
 				MecanicasJuego.atacar(mapa, posicionAtaque);
 				if (MecanicasJuego.getVidasBarcos() == 0) {
 					System.out.println("[" + NOMBRE + "] Has ganado, saliendo.");

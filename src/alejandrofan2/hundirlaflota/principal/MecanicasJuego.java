@@ -23,7 +23,7 @@ public class MecanicasJuego {
 			switch (mapa[posicionAtaqueX][posicionAtaqueY]) {
 			case 65:
 				//Ya has disparado ahi
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] Ya has disparado ahi, pasando turno.");
+				System.out.println(HundirLaFlota.ANSI_YELLOW + "[" + HundirLaFlota.NOMBRE + "] Ya has disparado ahi, pasando turno." + HundirLaFlota.ANSI_RESET);
 				nIntentos--;
 				break;
 			case 76:
@@ -56,7 +56,7 @@ public class MecanicasJuego {
 				break;
 			default:
 				//Fallo
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] Fallo en el sistema, saltando turno... (Sistema de ataque)");
+				System.out.println(HundirLaFlota.ANSI_RED + "[" + HundirLaFlota.NOMBRE + "] Fallo en el sistema, saltando turno... (Sistema de ataque)" + HundirLaFlota.ANSI_RESET);
 				break;
 			}
 		} else {
