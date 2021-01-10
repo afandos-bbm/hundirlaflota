@@ -8,16 +8,22 @@ public class GestorBarcos {
 	private static int nBuques = 3;
 	private static int nAcorazado = 1;
 	private static int nPortaaviones = 1;
+	public static int nTotal = 10;
 
 	private static void insertarLancha(char[][] mapa) { // 1
-		int posicionBuque[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
-		int posCreacionX = posicionBuque[0];
-		int posCreacionY = posicionBuque[1];
+		int posicionLancha[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
+		int posCreacionX = posicionLancha[0];
+		int posCreacionY = posicionLancha[1];
 		boolean check = false;
 		while (!check) {
 			try {
 				if (mapa[posCreacionX][posCreacionY] == 45) {
+						int i = 1;
+						String nombre = "Lancha"+i;
+						Barco lancha = new Barco(nombre, 1, posicionLancha);
+						HundirLaFlota.barcos.add(lancha);
 						mapa[posCreacionX][posCreacionY] = 76;
+						i++;
 						check = true;
 				} else {
 					int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
@@ -42,9 +48,14 @@ public class GestorBarcos {
 			while (!check) {
 				try {
 					if (mapa[posCreacionX][posCreacionY] == 45 && mapa[posCreacionX][posCreacionY + 1] == 45 && mapa[posCreacionX][posCreacionY + 2] == 45) {
+							int i = 1;
+							String nombre = "Buque"+i;
+							Barco buque = new Barco(nombre, 2, posicionBuque);
+							HundirLaFlota.barcos.add(buque);
 							mapa[posCreacionX][posCreacionY] = 66;
 							mapa[posCreacionX][posCreacionY + 1] = 66;
 							mapa[posCreacionX][posCreacionY + 2] = 66;
+							i++;
 							check = true;
 					} else {
 						int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
@@ -62,17 +73,22 @@ public class GestorBarcos {
 	}
 
 	private static void insertarAcorazado(char[][] mapa) { // 4 en horizontal
-		int posicionBuque[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
-		int posCreacionX = posicionBuque[0];
-		int posCreacionY = posicionBuque[1];
+		int posicionAcorazado[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
+		int posCreacionX = posicionAcorazado[0];
+		int posCreacionY = posicionAcorazado[1];
 		boolean check = false;
 		while (!check) {
 			try {
 				if (mapa[posCreacionX][posCreacionY] == 45 && mapa[posCreacionX][posCreacionY + 1] == 45 && mapa[posCreacionX][posCreacionY + 2] == 45 && mapa[posCreacionX][posCreacionY + 3] == 45 && mapa[posCreacionX][posCreacionY + 4] == 45) {
+						int i = 1;
+						String nombre = "Acorazado"+i;
+						Barco acorazado = new Barco(nombre, 3, posicionAcorazado);
+						HundirLaFlota.barcos.add(acorazado);
 						mapa[posCreacionX][posCreacionY] = 90;
 						mapa[posCreacionX][posCreacionY + 1] = 90;
 						mapa[posCreacionX][posCreacionY + 2] = 90;
 						mapa[posCreacionX][posCreacionY + 3] = 90;
+						i++;
 						check = true;
 				} else {
 					int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
@@ -90,18 +106,23 @@ public class GestorBarcos {
 	}
 
 	private static void insertarPortaaviones(char[][] mapa) { // 5 en vertical
-		int posicionBuque[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
-		int posCreacionX = posicionBuque[0];
-		int posCreacionY = posicionBuque[1];
+		int posicionPortaaviones[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
+		int posCreacionX = posicionPortaaviones[0];
+		int posCreacionY = posicionPortaaviones[1];
 		boolean check = false;
 		while (!check) {
 			try {
 				if (mapa[posCreacionX][posCreacionY] == 45 && mapa[posCreacionX + 1][posCreacionY] == 45 && mapa[posCreacionX + 2][posCreacionY] == 45 && mapa[posCreacionX + 3][posCreacionY] == 45 && mapa[posCreacionX + 4][posCreacionY] == 45) {
+						int i = 1;
+						String nombre = "Portaaviones"+i;
+						Barco Portaaviones = new Barco(nombre ,4, posicionPortaaviones);
+						HundirLaFlota.barcos.add(Portaaviones);
 						mapa[posCreacionX][posCreacionY] = 80;
 						mapa[posCreacionX + 1][posCreacionY] = 80;
 						mapa[posCreacionX + 2][posCreacionY] = 80;
 						mapa[posCreacionX + 3][posCreacionY] = 80;
 						mapa[posCreacionX + 4][posCreacionY] = 80;
+						i++;
 						check = true;
 				} else {
 					int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
@@ -131,6 +152,7 @@ public class GestorBarcos {
 		for (int i = 0; i < nLanchas; i++) {
 			insertarLancha(mapa);
 		}
+		nTotal = nLanchas + nBuques + nAcorazados + nPortaaviones;
 	}
 
 	public static int getnLanchas() {

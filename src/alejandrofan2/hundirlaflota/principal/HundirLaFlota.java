@@ -3,6 +3,7 @@ package alejandrofan2.hundirlaflota.principal;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -33,6 +34,8 @@ public class HundirLaFlota extends JFrame {
 	private static JFrame ventana;
 	private static Image icono;
 
+	public static ArrayList<Barco> barcos = new ArrayList<Barco>();
+	
 	// Constructor de la clase HundirLaFlota.
 	private HundirLaFlota() {
 		icono = new ImageIcon(RUTA_ICONO).getImage();
@@ -53,7 +56,11 @@ public class HundirLaFlota extends JFrame {
 	public static void main(String[] args) {
 		// @SuppressWarnings("unused")
 		// HundirLaFlota juego = new HundirLaFlota();
-		MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
+		int[] posicionAtaque = {3,4};
+		char[][] mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
+		MecanicasJuego.imprimirMapaConsola(mapa);
+		MecanicasJuego.atacar(mapa, posicionAtaque);
+		MecanicasJuego.imprimirMapaConsola(mapa);
 		// pantalla.iniciar();
 		while (isRunning) {
 
