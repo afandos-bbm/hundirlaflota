@@ -3,10 +3,7 @@ package alejandrofan2.hundirlaflota.principal;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
-<<<<<<< Updated upstream
-=======
 import java.util.Scanner;
->>>>>>> Stashed changes
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,7 +21,7 @@ public class HundirLaFlota extends JFrame {
 
 	public static final int ANCHO = 800;
 	public static final int ALTO = 600;
-	private static final String NOMBRE = "HUNDIR LA FLOTA (Singleplayer)";
+	public static final String NOMBRE = "HUNDIR LA FLOTA (Singleplayer)";
 	private static final String RUTA_ICONO = "res/images/icono.png";
 
 	private static volatile Boolean isRunning = false;
@@ -36,11 +33,7 @@ public class HundirLaFlota extends JFrame {
 
 	private static JFrame ventana;
 	private static Image icono;
-<<<<<<< Updated upstream
-
-=======
 	
->>>>>>> Stashed changes
 	// Constructor de la clase HundirLaFlota.
 	private HundirLaFlota() {
 		icono = new ImageIcon(RUTA_ICONO).getImage();
@@ -59,21 +52,14 @@ public class HundirLaFlota extends JFrame {
 
 	// Metodo main.
 	public static void main(String[] args) {
-<<<<<<< Updated upstream
-		// @SuppressWarnings("unused")
-		// HundirLaFlota juego = new HundirLaFlota();
-		MecanicasJuego.crearmapa(MecanicasJuego.getTamañoMapa());
-		// pantalla.iniciar();
-=======
 		@SuppressWarnings("unused")
 		HundirLaFlota juego = new HundirLaFlota();
 		int[] posicionAtaque = new int[2];
 		char[][] mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
 		pantalla.iniciar();
 		Boolean checkMapa = false;
->>>>>>> Stashed changes
-		while (isRunning) {
-			if (isPlaying()) {
+		while (isRunning) { //Se ejecuta cuando se inicia el segundo thread
+			if (isPlaying()) { //Se ejecuta cuando le das a el boton de jugar.
 
 				if (checkMapa == false) {
 					mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());

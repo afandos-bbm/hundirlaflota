@@ -7,16 +7,8 @@ public class MecanicasJuego {
 	private static int nIntentos = 50;
 	private static int tamañoMapa = 10;
 	private static int[] ejeX;
-	private static char[] ejeY;
-	private static char[][] MapaJugador;
-	private static char[][] MapaContrincante;
+	private static char[] ejeY = new char[]{65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90};
 
-	public MecanicasJuego() {
-		MapaJugador = crearmapa(tamañoMapa);
-		MapaContrincante = crearmapa(tamañoMapa);
-
-<<<<<<< Updated upstream
-=======
 	public static void atacar(char[][] mapa, int[] posicionAtaque) {
 		int posicionAtaqueX = posicionAtaque[0];
 		int posicionAtaqueY = posicionAtaque[1];
@@ -63,39 +55,38 @@ public class MecanicasJuego {
 		}
 		
 
->>>>>>> Stashed changes
 	}
-
-	public static char[][] crearmapa(int tamaño) {
+	
+	public static char[][] crearMapa(int tamaño) {
 		char[][] m = new char[tamaño][tamaño];
 		ejeX = new int[tamaño];
-<<<<<<< Updated upstream
-		ejeY = new char[tamaño];
-=======
 		int cont = 1;
 		char cont2 = 65;
 		for (int i = 0; i < ejeX.length; i++) {
 			ejeX[i] = cont++;
 		}
->>>>>>> Stashed changes
 		for (int i = 0; i < m.length; i++) {
-			int cont = 65;
-			ejeX[i] = i;
-			ejeY[i] = (char) cont;
-			cont++;
 			for (int j = 0; j < m.length; j++) {
 				m[i][j] = 45;
-				}
 			}
-		Barcos.insertarBarcos(m, Barcos.getnLanchas(), Barcos.getnBuques(), Barcos.getnAcorazado(),
-				Barcos.getnPortaaviones());
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + "  ");
-			}
-			System.out.println(ejeY + " | ");
 		}
+		GestorBarcos.insertarBarcos(m, GestorBarcos.getnLanchas(), GestorBarcos.getnBuques(), GestorBarcos.getnAcorazado(),GestorBarcos.getnPortaaviones());
 		return m;
+	}
+	
+	public static void imprimirMapaConsola(char[][] mapa) {
+		System.out.print(" ");
+		for (int i = 0; i < mapa.length; i++) {
+			System.out.print("  " + ejeX[i]);
+		}
+		System.out.println("");
+		for (int i = 0; i < mapa.length; i++) {
+			System.out.print(ejeY[i] + "  ");
+			for (int j = 0; j < mapa.length; j++) {
+				System.out.print(mapa[i][j] + "  ");
+			}
+			System.out.println("");
+		}
 	}
 
 	public static int getnIntentos() {
