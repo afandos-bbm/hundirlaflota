@@ -18,7 +18,10 @@ import alejandrofan2.hundirlaflota.utiles.ControlRaton;
 
 /*
  * Esta es la clase que se encarga de poner todos los objetos,
- * botones y demas cosas en la pantalla.
+ * botones y demas cosas en la pantalla. Consta de un segundo thread que se ejecuta 
+ * al iniciar el programa y corre conjuntamente con el metodo main, mientras que el
+ * anterior se encarga de las mecanicas y del juego en si este thread se encarga
+ * de todo el apartado grafico.
  */
 
 public class GestorPantalla extends JPanel implements Runnable {
@@ -83,6 +86,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 		botonLvl3.setIcon(imgLvl3);
 		botonLvl3.setText("");
 
+		//Posiciona las cosas en el Frame.
 		size = botonSalir.getPreferredSize();
 		botonSalir.setBounds(612 + insets.left, 503 + insets.top, size.width, size.height);
 		botonSalir.setVisible(true);
@@ -105,6 +109,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 		this.add(botonLvl2);
 		this.add(botonLvl3);
 		raton = new ControlRaton();
+		//Crea los listeners para poder saber si se hya clikado en ellos.
 		botonPlay.addMouseListener(raton);
 		botonSalir.addMouseListener(raton);
 		botonLvl1.addMouseListener(raton);
@@ -113,8 +118,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 	}
 
-	// Metodo abstracto de la clase JPanel el cual usamos para dibujar en la
-	// pantalla.
+	// Metodo abstracto de la clase JPanel el cual usamos para dibujar en la pantalla.
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -126,7 +130,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 	}
 
-	// Metodo que ejecuta el segundo thread de procesamiento.
+	//Metodo que ejecuta el segundo thread de procesamiento.
 	public void run() {
 		System.out.println("[" + HundirLaFlota.NOMBRE + "] El segundo thread se esta ejecutando.");
 		while (HundirLaFlota.getRunning()) {
@@ -136,6 +140,8 @@ public class GestorPantalla extends JPanel implements Runnable {
 		}
 	}
 
+	//Esta funcion habilita la funcionalidad del selector de nivel
+	// y solo es funcional mientras no le hayas dado al boton play. 
 	private void selectorNivel() {
 		switch (HundirLaFlota.getLvlAcual()) {
 		case 1:
@@ -243,7 +249,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 	}
 
-	// Metodo que inicia el thread.
+	//Metodo que inicia el thread.
 	public synchronized void iniciar() {
 		HundirLaFlota.setRunning(true);
 
@@ -251,7 +257,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 		thread.start();
 	}
 
-	// Metodo que detiene el thread.true
+	//Metodo que detiene el thread.
 	public synchronized void detener() {
 		HundirLaFlota.setPlaying(false);
 		HundirLaFlota.setRunning(false);
@@ -263,12 +269,12 @@ public class GestorPantalla extends JPanel implements Runnable {
 		}
 	}
 
-	// Getter del boton play que usamos para comprobar si se ha clickado en el.
+			/* Getters & Setters */
+
 	public static JLabel getBotonPlay() {
 		return botonPlay;
 	}
 
-	// Getter del boton salir que usamos para comprobar si se ha clickado en el.
 	public static JLabel getBotonSalir() {
 		return botonSalir;
 	}

@@ -47,10 +47,9 @@ public class HundirLaFlota extends JFrame {
 		ventana.pack();
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
-
 	}
 
-	// Metodo main.
+	// Metodo main. Ejecuta el hilo logico del programa.
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
 		HundirLaFlota juego = new HundirLaFlota();
@@ -60,17 +59,19 @@ public class HundirLaFlota extends JFrame {
 		Boolean checkMapa = false;
 		while (isRunning) { //Se ejecuta cuando se inicia el segundo thread
 			if (isPlaying()) { //Se ejecuta cuando le das a el boton de jugar.
-
-				if (checkMapa == false) {
+				if (!checkMapa) {
 					mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
 					checkMapa = true;
 				}
 				MecanicasJuego.imprimirMapaConsola(mapa);
 				Scanner teclado = new Scanner(System.in);
+				//Estos dos Scanners no estan controlados los fallos debido a que son temporales
+				// hasta que se habilite el apartado grafico.
+				System.out.print("Introduce la fila(A,B,C...)[Por ahora escribir numero]: ");
 				posicionAtaque[0] = teclado.nextInt() -1;
+				System.out.print("Introduce la columna(1,2,3...): ");
 				posicionAtaque[1] = teclado.nextInt() -1;
 				MecanicasJuego.atacar(mapa, posicionAtaque);
-				MecanicasJuego.imprimirMapaConsola(mapa);
 				if (MecanicasJuego.getVidasBarcos() == 0) {
 					System.out.println("[" + NOMBRE + "] Has ganado, saliendo.");
 					isPlaying = false;
@@ -82,10 +83,11 @@ public class HundirLaFlota extends JFrame {
 					isPlaying = false;
 					isRunning = false;
 					System.exit(0);
-				}
-			}
-		}
-	}
+				if (MecanicasJuego.getnIntentos() == 5) {
+					System.out.println("[" + NOMBRE + "] Te quedan 5 disparos.");					
+	}}}}}
+
+			/* Getters & Setters */
 
 	public static Boolean getIsRunning() {
 		return isRunning;
@@ -134,5 +136,4 @@ public class HundirLaFlota extends JFrame {
 	public static void setNivelpersonalizado(Boolean nivelpersonalizado) {
 		HundirLaFlota.nivelpersonalizado = nivelpersonalizado;
 	}
-
 }

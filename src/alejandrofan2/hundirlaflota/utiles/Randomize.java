@@ -1,5 +1,9 @@
 package alejandrofan2.hundirlaflota.utiles;
 
+/*
+ * Clase muy sencilla que simplemente genera un numero aleatorio respetando siempre el tamaño del mapa.
+ * */
+
 public class Randomize {
 
 	public static int[] puntoAleatorio(int tamañoMapa) {

@@ -2,6 +2,12 @@ package alejandrofan2.hundirlaflota.principal;
 
 import alejandrofan2.hundirlaflota.utiles.Randomize;
 
+/*
+ * Esta clase esta creada con el fin de gestionar todo el tema de los barcos
+ * se encarga de crear todos los barcos con todas sus datos en funcion del nivel
+ * y el numero de bbarcos que se le pida generar desde la funcion que lo unifica todo.
+ * */
+
 public class GestorBarcos {
 
 	private static int nLanchas = 5;
@@ -10,6 +16,7 @@ public class GestorBarcos {
 	private static int nPortaaviones = 1;
 	public static int nTotal = 10;
 
+	//Esta funcion crea una Lancha.
 	private static void insertarLancha(char[][] mapa) { // 1
 		int posicionLancha[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 		int posCreacionX = posicionLancha[0];
@@ -30,12 +37,12 @@ public class GestorBarcos {
 				int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 				posCreacionX = nuevaPosicion[0];
 				posCreacionY = nuevaPosicion[1];
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] " + e + " | Lancha");
 				check = false;
 			}
 		}
 	}
 
+	//Esta funcion crea un buque.
 	private static void insertarBuque(char[][] mapa) { // 3 en horizontal
 			int posicionBuque[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 			int posCreacionX = posicionBuque[0];
@@ -58,12 +65,12 @@ public class GestorBarcos {
 					int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 					posCreacionX = nuevaPosicion[0];
 					posCreacionY = nuevaPosicion[1];
-					System.out.println("[" + HundirLaFlota.NOMBRE + "] " + e + " | Buque");
 					check = false;
 				}
 			}
 	}
 
+	//Esta funcion crea un acorazado.
 	private static void insertarAcorazado(char[][] mapa) { // 4 en horizontal
 		int posicionAcorazado[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 		int posCreacionX = posicionAcorazado[0];
@@ -87,12 +94,12 @@ public class GestorBarcos {
 				int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 				posCreacionX = nuevaPosicion[0];
 				posCreacionY = nuevaPosicion[1];
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] " + e + " | Acorazado");
 				check = false;
 			}
 		}
 	}
-
+	
+	//Esta funcion crea un portaaviones.
 	private static void insertarPortaaviones(char[][] mapa) { // 5 en vertical
 		int posicionPortaaviones[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 		int posCreacionX = posicionPortaaviones[0];
@@ -118,12 +125,12 @@ public class GestorBarcos {
 				int nuevaPosicion[] = Randomize.puntoAleatorio(MecanicasJuego.getTamañoMapa());
 				posCreacionX = nuevaPosicion[0];
 				posCreacionY = nuevaPosicion[1];
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] " + e + " | Portaaviones");
 				check = false;
 			}
 		}
 	}
-
+	
+	//Esta funcion inserta todos los barcos creados en el mapa.
 	public static void insertarBarcos(char[][] mapa, int nLanchas, int nBuques, int nAcorazados, int nPortaaviones) {
 		for (int i = 0; i < nPortaaviones; i++) {
 			insertarPortaaviones(mapa);
@@ -140,6 +147,8 @@ public class GestorBarcos {
 		nTotal = nLanchas + nBuques + nAcorazados + nPortaaviones;
 	}
 
+			/* Getters & Setters */
+	
 	public static int getnLanchas() {
 		return nLanchas;
 	}
