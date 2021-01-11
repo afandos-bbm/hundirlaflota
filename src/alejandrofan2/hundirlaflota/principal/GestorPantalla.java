@@ -120,7 +120,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 	// Metodo abstracto de la clase JPanel el cual usamos para dibujar en la pantalla.
 	@Override
-	public void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		this.setBackground(Color.BLACK);
 		Graphics2D g2D = (Graphics2D) g;
@@ -146,10 +146,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 				if (!quitarBotones) {
 					repaint();
 					quitarBotones = true;
-				}
-			}
-		}
-	}
+	}}}}
 
 	//Esta funcion habilita la funcionalidad del selector de nivel
 	// y solo es funcional mientras no le hayas dado al boton play. 
@@ -256,9 +253,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 
 		default:
 			break;
-		}
-
-	}
+	}}
 
 	//Metodo que inicia el thread.
 	public synchronized void iniciar() {
@@ -277,8 +272,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 			thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
-	}
+	}}
 
 			/* Getters & Setters */
 

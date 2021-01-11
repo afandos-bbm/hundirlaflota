@@ -1,7 +1,6 @@
 package alejandrofan2.hundirlaflota.principal;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.util.Scanner;
 
@@ -45,7 +44,6 @@ public class HundirLaFlota extends JFrame {
 	// Constructor de la clase HundirLaFlota.
 	private HundirLaFlota() {
 		icono = new ImageIcon(RUTA_ICONO).getImage();
-		this.setPreferredSize(new Dimension(ANCHO, ALTO));
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setIconImage(icono);
@@ -55,13 +53,14 @@ public class HundirLaFlota extends JFrame {
 		ventana.pack();
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
+
 	}
 
 	// Metodo main. Ejecuta el hilo logico del programa.
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
 		HundirLaFlota juego = new HundirLaFlota();
+		@SuppressWarnings("resource")
 		Scanner teclado = new Scanner(System.in);
 		int[] posicionAtaque = new int[2];
 		char[][] mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
