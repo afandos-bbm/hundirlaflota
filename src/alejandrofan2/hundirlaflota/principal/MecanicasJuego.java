@@ -31,28 +31,28 @@ public class MecanicasJuego {
 				nIntentos--;
 				vidasBarcos--;
 				mapa[posicionAtaqueX][posicionAtaqueY] = 65;
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] Tocado.");
+				System.out.println("[" + HundirLaFlota.NOMBRE + "] [Intentos: " + nIntentos + " ] Tocado.");
 				break;
 			case 66:
 				//Buque
 				nIntentos--;
 				vidasBarcos--;
 				mapa[posicionAtaqueX][posicionAtaqueY] = 65;
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] Tocado.");
+				System.out.println("[" + HundirLaFlota.NOMBRE + "] [Intentos: " + nIntentos + " ] Tocado.");
 				break;
 			case 90:
 				//Acorazado
 				nIntentos--;
 				vidasBarcos--;
 				mapa[posicionAtaqueX][posicionAtaqueY] = 65;
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] Tocado.");
+				System.out.println("[" + HundirLaFlota.NOMBRE + "] [Intentos: " + nIntentos + " ] Tocado.");
 				break;
 			case 80:
 				//Portaaviones
 				nIntentos--;
 				vidasBarcos--;
 				mapa[posicionAtaqueX][posicionAtaqueY] = 65;
-				System.out.println("[" + HundirLaFlota.NOMBRE + "] Tocado.");
+				System.out.println("[" + HundirLaFlota.NOMBRE + "] [Intentos: " + nIntentos + " ] Tocado.");
 				break;
 			default:
 				//Fallo
@@ -62,7 +62,7 @@ public class MecanicasJuego {
 		} else {
 			// Agua
 			nIntentos--;
-			System.out.println("[" + HundirLaFlota.NOMBRE + "] Aguaaa!!");
+			System.out.println("[" + HundirLaFlota.NOMBRE + "] [Intentos: " + nIntentos + " ] Aguaaa!!");
 			mapa[posicionAtaqueX][posicionAtaqueY] = 65;
 		}
 		
@@ -89,7 +89,7 @@ public class MecanicasJuego {
 	
 	//Esta funcion provisional imprime el mapa en consola para realizar pruebas.
 	public static void imprimirMapaConsola(char[][] mapa) {
-		System.out.print(" ");
+		System.out.print("\n ");
 		for (int i = 0; i < mapa.length; i++) {
 			System.out.print("  " + ejeX[i]);
 		}

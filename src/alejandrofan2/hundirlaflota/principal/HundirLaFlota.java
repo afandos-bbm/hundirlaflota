@@ -26,7 +26,7 @@ public class HundirLaFlota extends JFrame {
 	public static final String NOMBRE = "HUNDIR LA FLOTA (Singleplayer)";
 	private static final String RUTA_ICONO = "res/images/icono.png";
 	
-	//Constantes para el uso de colores en la consola
+	//Constantes para el uso de colores en la consola.
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_GREEN = "\u001B[32m";
 	public static final String ANSI_YELLOW = "\u001B[33m";
@@ -58,6 +58,7 @@ public class HundirLaFlota extends JFrame {
 	}
 
 	// Metodo main. Ejecuta el hilo logico del programa.
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
 		HundirLaFlota juego = new HundirLaFlota();
@@ -65,35 +66,43 @@ public class HundirLaFlota extends JFrame {
 		char[][] mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
 		pantalla.iniciar();
 		Boolean checkMapa = false;
-		while (isRunning) { //Se ejecuta cuando se inicia el segundo thread
+		//Para jugar de forma no grafica debes seleccionar el nivel y darle a jugar desde el JFrame debido a que el codigo original esta
+		// pensado para jugar con GUI y no sin ella.
+		System.out.println(ANSI_YELLOW + "[" + NOMBRE + "] Debes selecionar el nivel desde la GUI. (Temporalmente)" + ANSI_RESET);
+		while (isRunning) { //Se ejecuta cuando se inicia el segundo thread.
 			if (isPlaying()) { //Se ejecuta cuando le das a el boton de jugar.
 				if (!checkMapa) {
 					mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
 					checkMapa = true;
 				}
 				MecanicasJuego.imprimirMapaConsola(mapa);
-				@SuppressWarnings("resource")
-				Scanner teclado = new Scanner(System.in);
 				//Estos dos Scanners no estan controlados los fallos debido a que son temporales
-				// hasta que se habilite el apartado grafico.
-				System.out.print("Introduce la fila(A,B,C...): ");
-				posicionAtaque[0] = Transformer.letraanum(teclado.nextLine()) - 1;
-				System.out.print("Introduce la columna(1,2,3...): ");
-				posicionAtaque[1] = teclado.nextInt() - 1;
+				Scanner teclado = new Scanner(System.in);
+				System.out.print("\nIntroduce la fila y columna(A1,B2,C3...): ");
+				String coords = teclado.nextLine();
+				if (Transformer.letraanum((String) coords.subSequence(0, 1)) - 1 >= MecanicasJuego.getTamañoMapa() || Integer.parseInt((String) coords.subSequence(1, 2)) - 1 >= MecanicasJuego.getTamañoMapa() || (coords.subSequence(1, 2).toString().matches("[0-9]"))) {     
+					System.out.println(ANSI_YELLOW + "[" + NOMBRE + "] Debes colocar el formato correcto o no salirte del mapa. (A1,B2,C3...)" + ANSI_RESET);
+					continue;
+				}
+				posicionAtaque[0] = Transformer.letraanum((String) coords.subSequence(0, 1)) - 1;
+				if (coords.length() < 3)
+					posicionAtaque[1] = Integer.parseInt((String) coords.subSequence(1, 2)) - 1;
+				else
+					posicionAtaque[1] = Integer.parseInt((String) coords.subSequence(1, 3)) - 1;
 				MecanicasJuego.atacar(mapa, posicionAtaque);
 				if (MecanicasJuego.getVidasBarcos() == 0) {
-					System.out.println("[" + NOMBRE + "] Has ganado, saliendo.");
+					System.out.println(ANSI_GREEN + "\n[" + NOMBRE + "] Has ganado, pulsa cualquier tecla para salir." + ANSI_RESET);
 					isPlaying = false;
 					isRunning = false;
 					System.exit(0);
 				}
 				if (MecanicasJuego.getnIntentos() == 0) {
-					System.out.println("[" + NOMBRE + "] Has perdido, saliendo.");
+					System.out.println("\n[" + NOMBRE + "] Has perdido, saliendo.");
 					isPlaying = false;
 					isRunning = false;
 					System.exit(0);
 				if (MecanicasJuego.getnIntentos() == 5) {
-					System.out.println("[" + NOMBRE + "] Te quedan 5 disparos.");					
+					System.out.println("\n[" + NOMBRE + "] Te quedan 5 disparos.\n");					
 	}}}}}
 
 			/* Getters & Setters */
