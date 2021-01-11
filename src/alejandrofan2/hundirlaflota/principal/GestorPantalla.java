@@ -133,9 +133,20 @@ public class GestorPantalla extends JPanel implements Runnable {
 	//Metodo que ejecuta el segundo thread de procesamiento.
 	public void run() {
 		System.out.println(HundirLaFlota.ANSI_GREEN + "[" + HundirLaFlota.NOMBRE + "] El segundo thread se esta ejecutando." + HundirLaFlota.ANSI_RESET);
+		Boolean quitarBotones = false;
 		while (HundirLaFlota.getRunning()) {
 			if (!HundirLaFlota.isPlaying()) {
 				selectorNivel();
+			}
+			if (HundirLaFlota.getIsPlaying()) {
+				this.remove(botonLvl1);
+				this.remove(botonLvl2);
+				this.remove(botonLvl3);
+				this.remove(botonPlay);
+				if (!quitarBotones) {
+					repaint();
+					quitarBotones = true;
+				}
 			}
 		}
 	}
@@ -227,7 +238,7 @@ public class GestorPantalla extends JPanel implements Runnable {
 					GestorBarcos.setnBuques(Integer.parseInt(nBuques.getText()));
 					GestorBarcos.setnAcorazado(Integer.parseInt(nAcorazados.getText()));
 					GestorBarcos.setnPortaaviones(Integer.parseInt(nPortaaviones.getText()));
-					MecanicasJuego.setTamañoMapa(Integer.parseInt(tamaño.getText()) + 1);
+					MecanicasJuego.setTamañoMapa(Integer.parseInt(tamaño.getText()));
 					MecanicasJuego.setnIntentos(Integer.parseInt(nIntentos.getText()));
 					imgLvl1 = new ImageIcon(RUTA_LVL1_ROJO);
 					imgLvl2 = new ImageIcon(RUTA_LVL2_ROJO);

@@ -91,13 +91,20 @@ public class MecanicasJuego {
 	public static void imprimirMapaConsola(char[][] mapa) {
 		System.out.print("\n ");
 		for (int i = 0; i < mapa.length; i++) {
-			System.out.print("  " + ejeX[i]);
+			System.out.print("  " + ejeX[i] + " ");
 		}
 		System.out.println("");
 		for (int i = 0; i < mapa.length; i++) {
 			System.out.print(ejeY[i] + "  ");
 			for (int j = 0; j < mapa.length; j++) {
-				System.out.print(mapa[i][j] + "  ");
+				if (j >= 10) {
+					if (j == 10) {
+						System.out.print(" ");
+					}
+					System.out.print(mapa[i][j] + "    ");
+				}else {
+					System.out.print(mapa[i][j] + "   ");
+				}
 			}
 			System.out.println("");
 		}

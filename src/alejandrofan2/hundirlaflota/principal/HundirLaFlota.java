@@ -62,6 +62,7 @@ public class HundirLaFlota extends JFrame {
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
 		HundirLaFlota juego = new HundirLaFlota();
+		Scanner teclado = new Scanner(System.in);
 		int[] posicionAtaque = new int[2];
 		char[][] mapa = MecanicasJuego.crearMapa(MecanicasJuego.getTamañoMapa());
 		pantalla.iniciar();
@@ -77,7 +78,6 @@ public class HundirLaFlota extends JFrame {
 				}
 				MecanicasJuego.imprimirMapaConsola(mapa);
 				//Estos dos Scanners no estan controlados los fallos debido a que son temporales
-				Scanner teclado = new Scanner(System.in);
 				System.out.print("\nIntroduce la fila y columna(A1,B2,C3...): ");
 				String coords = teclado.nextLine();
 				if (Transformer.letraanum((String) coords.subSequence(0, 1)) - 1 >= MecanicasJuego.getTamañoMapa() || Integer.parseInt((String) coords.subSequence(1, 2)) - 1 >= MecanicasJuego.getTamañoMapa() || (coords.subSequence(1, 2).toString().matches("[0-9]"))) {     
